@@ -1,0 +1,48 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-04-10T19:36:13+02:00",
+    "name": "Python Pterodactyl Discord Bot 2.0",
+    "author": "parker@parkervcp.com",
+    "description": "A egg that installs a Pterodactyl Discord Bot\r\n\r\nThis egg is build on the python egg from parkervcp",
+    "features": null,
+    "docker_images": {
+        "Python 3.12": "ghcr.io\/parkervcp\/yolks:python_3.12",
+        "Python 3.11": "ghcr.io\/parkervcp\/yolks:python_3.11",
+        "Python 3.10": "ghcr.io\/parkervcp\/yolks:python_3.10",
+        "Python 3.9": "ghcr.io\/parkervcp\/yolks:python_3.9",
+        "Python 3.8": "ghcr.io\/parkervcp\/yolks:python_3.8",
+        "Python 3.7": "ghcr.io\/parkervcp\/yolks:python_3.7",
+        "Python 2.7": "ghcr.io\/parkervcp\/yolks:python_2.7"
+    },
+    "file_denylist": [],
+    "startup": "\/usr\/local\/bin\/python \/home\/container\/{{START_FILE}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"change this part\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Pterodactyl Python Bot Install Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git curl jq file unzip make gcc g++ libtool\r\n\r\necho \"Installing Dependencies\"\r\ncd \/mnt\/server\r\npip install python-json-config py-dactyl pytz py-cord[voice]\r\n\r\necho \"Getting bot from GitHub...\"\r\ngit clone https:\/\/github.com\/Poseidon281\/Pterodactyl-Discord-Bot.git \/mnt\/server\r\n\r\necho -e \"Installation complete.\"\r\nexit 0",
+            "container": "python:3.8-slim-bookworm",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "App py file",
+            "description": "The file that you want to start the bot",
+            "env_variable": "START_FILE",
+            "default_value": "bot\/start.py",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        }
+    ]
+}
