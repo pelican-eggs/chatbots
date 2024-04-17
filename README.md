@@ -17,6 +17,7 @@
 * [Muse](/bots/discord/muse) Node JS
 * [parkertron](/bots/discord/parkertron) Golang
 * [pixel-bot](/bots/discord/pixelbot) Python
+* [PteroDiscordBot](/bots/discord\PterodiscordBot/Python)
 * [Redbot](/bots/discord/redbot) Python
 * [Ree6](/bots/discord/ree6) Java
 * [SinusBot](/bots/discord/sinusbot)
