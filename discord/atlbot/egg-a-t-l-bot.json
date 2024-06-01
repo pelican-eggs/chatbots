@@ -4,9 +4,10 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-06-01T19:18:01+00:00",
+    "exported_at": "2024-06-01T19:44:10+00:00",
     "name": "ATLBot",
     "author": "jfeldt19@gmail.com",
+    "uuid": "5adce3a7-2de3-47a6-b19e-1609541238a7",
     "description": "ATLbot in ptero\r\n\r\nhttps:\/\/github.com\/ATLauncher\/discord-bot\/",
     "features": null,
     "docker_images": {

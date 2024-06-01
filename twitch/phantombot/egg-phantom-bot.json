@@ -4,9 +4,10 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-06-01T19:17:56+00:00",
+    "exported_at": "2024-06-01T19:44:04+00:00",
     "name": "PhantomBot",
     "author": "mail@wuffy.eu",
+    "uuid": "40400812-be8c-48d3-8a59-9a76252d0db8",
     "description": "PhantomBot is an actively developed open source interactive Twitch bot with a vibrant community that provides entertainment and moderation for your channel, allowing you to focus on what matters the most to you - your game and your viewers.",
     "features": null,
     "docker_images": {

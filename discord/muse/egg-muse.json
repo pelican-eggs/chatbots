@@ -4,9 +4,10 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-06-01T19:17:54+00:00",
+    "exported_at": "2024-06-01T19:44:16+00:00",
     "name": "Muse",
     "author": "hello@apollo.moe",
+    "uuid": "d0cd727e-3f34-40f2-918e-85556830365c",
     "description": "\ud83c\udfa7 a self-hosted midwestern Discord music bot that doesn't suck",
     "features": null,
     "docker_images": {

@@ -4,9 +4,10 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-06-01T19:17:53+00:00",
+    "exported_at": "2024-06-01T19:44:14+00:00",
     "name": "JMusicBot",
     "author": "parker@parkervcp.com",
+    "uuid": "e90f4b6d-e86b-4a0b-8fbb-6f8f2249c7a1",
     "description": "A Discord music bot that's easy to set up and run yourself!",
     "features": null,
     "docker_images": {

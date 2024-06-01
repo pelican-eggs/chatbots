@@ -4,9 +4,10 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-06-01T19:18:01+00:00",
+    "exported_at": "2024-06-01T19:44:09+00:00",
     "name": "Bastion",
     "author": "parker@parkervcp.com",
+    "uuid": "5756f4b5-4bd5-4fb5-a4fe-a30f305049d5",
     "description": "Bastion is a multi-purpose Discord Bot that can help you automate most tasks in your server, from administration and moderation to keeping the members active through various incentives, games and other fun activities",
     "features": null,
     "docker_images": {

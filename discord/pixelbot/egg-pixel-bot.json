@@ -4,9 +4,10 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-06-01T19:17:56+00:00",
+    "exported_at": "2024-06-01T19:44:06+00:00",
     "name": "pixel-bot",
     "author": "parker@parkervcp.com",
+    "uuid": "4c71610d-021b-4bae-bfa6-7132ff4980b0",
     "description": "A Discord bot written in Python using discord.py\r\n\r\nhttps:\/\/github.com\/Ispira\/pixel-bot",
     "features": null,
     "docker_images": {

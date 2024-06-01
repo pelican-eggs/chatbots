@@ -4,9 +4,10 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-06-01T19:18:03+00:00",
+    "exported_at": "2024-06-01T19:44:14+00:00",
     "name": "fragbot",
     "author": "parker@parkervcp.com",
+    "uuid": "1dcebfab-0726-4fd5-b21e-7608fd4d760f",
     "description": "The fragforce discord bot.\r\n\r\nlocated at https:\/\/github.com\/fragforce\/fragbot",
     "features": null,
     "docker_images": {

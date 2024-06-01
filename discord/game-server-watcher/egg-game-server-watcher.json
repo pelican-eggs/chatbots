@@ -4,9 +4,10 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-06-01T19:17:53+00:00",
+    "exported_at": "2024-06-01T19:44:15+00:00",
     "name": "Game Server Watcher",
     "author": "a-sync@devs.space",
+    "uuid": "d163b89a-a9e6-4525-b073-a405eec86fc1",
     "description": "A simple discord\/telegram\/slack bot that can be hosted on a free service to monitor your game servers and players in style. \ud83d\ude0e",
     "features": null,
     "docker_images": {

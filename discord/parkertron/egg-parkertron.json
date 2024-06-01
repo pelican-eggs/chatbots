@@ -4,9 +4,10 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-06-01T19:17:55+00:00",
+    "exported_at": "2024-06-01T19:44:04+00:00",
     "name": "parkertron",
     "author": "parker@parkervcp.com",
+    "uuid": "75489f17-c2a3-40b6-81b0-3de074ed69ac",
     "description": "The stupid chatbot parkertron by Parkervcp.\r\n\r\nhttps:\/\/github.com\/parkervcp\/parkertron",
     "features": null,
     "docker_images": {

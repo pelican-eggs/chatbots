@@ -4,9 +4,10 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-06-01T19:18:03+00:00",
+    "exported_at": "2024-06-01T19:44:12+00:00",
     "name": "Dynamica",
     "author": "sebastian.pietschner@gmail.com",
+    "uuid": "9327bb06-ab17-4dd4-ba8d-6b56a89b1c7f",
     "description": "An easy-to-use dynamic voice channel bot.",
     "features": null,
     "docker_images": {

@@ -4,9 +4,10 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-06-01T19:17:57+00:00",
+    "exported_at": "2024-06-01T19:44:07+00:00",
     "name": "Sinusbot",
     "author": "support@pterodactyl.io",
+    "uuid": "901e5e18-bf96-4839-98dd-a9fc2dd1d8d9",
     "description": "Musicbot for Discord and Teamspeak.",
     "features": null,
     "docker_images": {

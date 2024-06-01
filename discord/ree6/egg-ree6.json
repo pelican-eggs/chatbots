@@ -4,9 +4,10 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-06-01T19:17:58+00:00",
+    "exported_at": "2024-06-01T19:44:06+00:00",
     "name": "Ree6",
     "author": "presti@presti.me",
+    "uuid": "819a8b3d-6e7b-4494-848d-7bdb56287b4f",
     "description": "All-in-one, open source and 100% free Discord Bot!",
     "features": null,
     "docker_images": {

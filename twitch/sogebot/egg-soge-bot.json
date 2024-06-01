@@ -4,9 +4,10 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-06-01T19:17:58+00:00",
+    "exported_at": "2024-06-01T19:44:08+00:00",
     "name": "SogeBot",
     "author": "eggs@goover.dev",
+    "uuid": "de0afcb1-1740-48c1-8580-bed4b1d9f3f0",
     "description": "sogeBot - Free Twitch Bot built on Node.js https:\/\/sogebot.xyz\/",
     "features": null,
     "docker_images": {
