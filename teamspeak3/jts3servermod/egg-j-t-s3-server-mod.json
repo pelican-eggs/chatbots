@@ -1,10 +1,10 @@
 {
-    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL",
     "meta": {
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-07-03T18:18:04-04:00",
+    "exported_at": "2024-06-01T19:17:54+00:00",
     "name": "JTS3ServerMod",
     "author": "teamwuffy@gmail.com",
     "description": "Setup:\r\n- Install the latest version\r\n- Go into config\/server1 and edit JTS3ServerMod_server.cfg\r\n- Save and start the server\r\n\r\nAuthor: https:\/\/www.stefan1200.de\/forum\/index.php?topic=2.0",
@@ -36,6 +36,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:20",
+            "sort": null,
             "field_type": "text"
         }
     ]

@@ -1,10 +1,10 @@
 {
-    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL",
     "meta": {
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-09-20T21:17:10+02:00",
+    "exported_at": "2024-06-01T19:17:53+00:00",
     "name": "JMusicBot",
     "author": "parker@parkervcp.com",
     "description": "A Discord music bot that's easy to set up and run yourself!",
@@ -36,6 +36,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string",
+            "sort": null,
             "field_type": "text"
         },
         {
@@ -46,6 +47,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|digits_between:17,18",
+            "sort": null,
             "field_type": "text"
         },
         {
@@ -56,6 +58,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "nullable|string|max:20",
+            "sort": null,
             "field_type": "text"
         },
         {
@@ -66,6 +69,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:20",
+            "sort": null,
             "field_type": "text"
         },
         {
@@ -76,6 +80,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "nullable|string|max:20",
+            "sort": null,
             "field_type": "text"
         },
         {
@@ -86,6 +91,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|in:ONLINE,IDLE,DND,INVISIBLE",
+            "sort": null,
             "field_type": "text"
         },
         {
@@ -96,6 +102,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|in:true,false",
+            "sort": null,
             "field_type": "text"
         },
         {
@@ -106,6 +113,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|in:true,false",
+            "sort": null,
             "field_type": "text"
         },
         {
@@ -116,6 +124,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|in:true,false",
+            "sort": null,
             "field_type": "text"
         },
         {
@@ -126,6 +135,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|integer",
+            "sort": null,
             "field_type": "text"
         },
         {
@@ -136,6 +146,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|integer",
+            "sort": null,
             "field_type": "text"
         }
     ]

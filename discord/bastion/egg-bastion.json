@@ -1,10 +1,10 @@
 {
-    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL",
     "meta": {
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-04-02T14:04:19+02:00",
+    "exported_at": "2024-06-01T19:18:01+00:00",
     "name": "Bastion",
     "author": "parker@parkervcp.com",
     "description": "Bastion is a multi-purpose Discord Bot that can help you automate most tasks in your server, from administration and moderation to keeping the members active through various incentives, games and other fun activities",
@@ -36,6 +36,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:80",
+            "sort": null,
             "field_type": "text"
         },
         {
@@ -46,6 +47,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:32",
+            "sort": null,
             "field_type": "text"
         },
         {
@@ -56,6 +58,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:128",
+            "sort": null,
             "field_type": "text"
         },
         {
@@ -66,6 +69,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|in:true,false",
+            "sort": null,
             "field_type": "text"
         },
         {
@@ -76,6 +80,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|in:true,false",
+            "sort": null,
             "field_type": "text"
         },
         {
@@ -86,6 +91,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|in:true,false",
+            "sort": null,
             "field_type": "text"
         },
         {
@@ -96,6 +102,7 @@
             "user_viewable": true,
             "user_editable": false,
             "rules": "required|string|max:10",
+            "sort": null,
             "field_type": "text"
         },
         {
@@ -106,6 +113,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "nullable|string|max:128",
+            "sort": null,
             "field_type": "text"
         },
         {
@@ -116,6 +124,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|in:npm start,npm run commands",
+            "sort": null,
             "field_type": "text"
         }
     ]
