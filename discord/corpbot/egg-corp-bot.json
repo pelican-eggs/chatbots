@@ -1,12 +1,13 @@
 {
-    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL",
     "meta": {
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-04-01T11:18:44+02:00",
+    "exported_at": "2024-06-01T19:44:10+00:00",
     "name": "CorpBot",
     "author": "parker@parkervcp.com",
+    "uuid": "35d72a38-8c09-49fc-bdb3-e349151306fb",
     "description": "A very clumsy python bot for discord \r\n\r\nhttps:\/\/github.com\/corpnewt\/CorpBot.py",
     "features": null,
     "docker_images": {
@@ -36,6 +37,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string",
+            "sort": null,
             "field_type": "text"
         },
         {
@@ -46,6 +48,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string",
+            "sort": null,
             "field_type": "text"
         }
     ]

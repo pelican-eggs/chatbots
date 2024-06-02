@@ -1,12 +1,13 @@
 {
-    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL",
     "meta": {
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-08-05T10:50:21+02:00",
+    "exported_at": "2024-06-01T19:44:05+00:00",
     "name": "Red",
     "author": "parker@parkervcp.com",
+    "uuid": "b9413cbb-4422-4bd2-960f-1d4367248809",
     "description": "A multifunction Discord bot \r\n\r\nhttps:\/\/github.com\/Cog-Creators\/Red-DiscordBot",
     "features": null,
     "docker_images": {
@@ -36,6 +37,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string",
+            "sort": null,
             "field_type": "text"
         },
         {
@@ -46,6 +48,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string",
+            "sort": null,
             "field_type": "text"
         },
         {
@@ -56,6 +59,7 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:30",
+            "sort": null,
             "field_type": "text"
         }
     ]
