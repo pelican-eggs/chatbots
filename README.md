@@ -4,7 +4,7 @@
 
 [Discord](/discord)
 
-**Note:** these are actual Discord bot eggs, NOT language eggs. The old language eggs (discord-js-generic, discord-py-generic, etc) have been moved to the [generic languages section](#generic-languages).
+**Note:** these are actual Discord bot eggs, NOT language eggs. The old language eggs (discord-js-generic, discord-py-generic, etc) have been moved to the [generic languages repo](https://github.com/pelican-eggs/generic).
 
 * [Aoede](/discord/aoede) Rust
 * [ATL Bot](/discord/atlbot) Node JS
