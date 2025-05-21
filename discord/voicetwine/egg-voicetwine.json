@@ -4,13 +4,13 @@
         "version": "PLCN_v1",
         "update_url": null
     },
-    "exported_at": "2025-05-20T18:45:37+00:00",
+    "exported_at": "2025-05-21T14:50:45+00:00",
     "name": "VoiceTwine",
     "author": "twijn@twijn.net",
     "uuid": "966787cb-eb63-467a-ac4b-52d8de0c9d5c",
     "description": "Dynamic voice channel manager for Discord",
     "tags": [],
-    "features": null,
+    "features": [],
     "docker_images": {
         "Node 22": "ghcr.io\/parkervcp\/yolks:nodejs_22"
     },
@@ -31,7 +31,7 @@
     },
     "variables": [
         {
-            "sort": null,
+            "sort": 12,
             "name": "GitHub Branch",
             "description": "The branch to use from GitHub",
             "env_variable": "BRANCH",
@@ -44,7 +44,7 @@
             ]
         },
         {
-            "sort": null,
+            "sort": 8,
             "name": "Discord Client ID",
             "description": "Discord client ID, retrieved from the Developer panel",
             "env_variable": "DISCORD_CLIENT_ID",
@@ -53,11 +53,11 @@
             "user_editable": true,
             "rules": [
                 "required",
-                "string"
+                "numeric"
             ]
         },
         {
-            "sort": null,
+            "sort": 9,
             "name": "Discord Client Secret",
             "description": "Discord client secret, retrieved from the Developer panel",
             "env_variable": "DISCORD_CLIENT_SECRET",
@@ -70,7 +70,7 @@
             ]
         },
         {
-            "sort": null,
+            "sort": 10,
             "name": "Discord Token",
             "description": "Discord bot token, retrieved from the Developer panel",
             "env_variable": "DISCORD_TOKEN",
@@ -83,7 +83,7 @@
             ]
         },
         {
-            "sort": null,
+            "sort": 11,
             "name": "GitHub Address",
             "description": "The GitHub address for VoiceTwine. Defaults to the main repo, but can be changed to a custom one.",
             "env_variable": "GIT_ADDRESS",
@@ -96,7 +96,7 @@
             ]
         },
         {
-            "sort": null,
+            "sort": 2,
             "name": "Log Level",
             "description": "Logging level for VoiceTwine",
             "env_variable": "LOG_LEVEL",
@@ -110,20 +110,19 @@
             ]
         },
         {
-            "sort": null,
+            "sort": 7,
             "name": "MariaDB Database",
             "description": "MariaDB schema name",
             "env_variable": "MARIADB_DB",
-            "default_value": "voicetwine",
+            "default_value": "s1_voicetwine",
             "user_viewable": true,
             "user_editable": true,
             "rules": [
-                "required",
                 "string"
             ]
         },
         {
-            "sort": null,
+            "sort": 3,
             "name": "MariaDB Host",
             "description": "MariaDB server host address",
             "env_variable": "MARIADB_HOST",
@@ -131,12 +130,11 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": [
-                "required",
                 "string"
             ]
         },
         {
-            "sort": null,
+            "sort": 6,
             "name": "MariaDB Password",
             "description": "MariaDB password",
             "env_variable": "MARIADB_PASS",
@@ -144,12 +142,11 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": [
-                "required",
                 "string"
             ]
         },
         {
-            "sort": null,
+            "sort": 4,
             "name": "MariaDB Port",
             "description": "MariaDB server port",
             "env_variable": "MARIADB_PORT",
@@ -157,12 +154,11 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": [
-                "required",
                 "numeric"
             ]
         },
         {
-            "sort": null,
+            "sort": 5,
             "name": "MariaDB User",
             "description": "MariaDB username",
             "env_variable": "MARIADB_USER",
@@ -170,12 +166,11 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": [
-                "required",
                 "string"
             ]
         },
         {
-            "sort": null,
+            "sort": 1,
             "name": "Node Environment",
             "description": "The environment setting to use for Node.js",
             "env_variable": "NODE_ENV",
