@@ -11,7 +11,7 @@
             </a>
             <br />
             <a href="https://github.com/parkervcp/eggs/commits?author=TubaApollo" title="Codes">💻</a>
-            <a href="https://github.com/parkervcp/eggs/commits?author=TubaApollo" title="Maintains">🔨</a>
+            <a href="https://github.com/parkervcp/eggs/commits?author=TubaApollo" title="Contributor">💡</a>
         </td>
         <td align="center">
             <a href="https://github.com/lilkingjr1">
@@ -19,7 +19,7 @@
             </a>
             <br />
             <a href="https://github.com/parkervcp/eggs/commits?author=lilkingjr1" title="Codes">💻</a>
-            <a href="https://github.com/parkervcp/eggs/commits?author=lilkingjr1" title="Contributor">💡</a>
+            <a href="https://github.com/parkervcp/eggs/commits?author=lilkingjr1" title="Maintains">🔨</a>
         </td>
         <td align="center">
             <a href="https://github.com/QuintenQVD0">
@@ -34,10 +34,16 @@
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
 
-## Their [Github](https://github.com/codetheweb/muse)
+___
 
-Muse is a highly-opinionated midwestern self-hosted Discord music bot that doesn't suck.
+### Game Description
 
-## Server Ports
+From Muse's [Github](https://github.com/codetheweb/muse):
 
-There are no ports required for the Muse bot
+> Muse is a highly-opinionated midwestern self-hosted Discord music bot that doesn't suck. It's made for small to medium-sized Discord servers/guilds (think about a group the size of you, your friends, and your friend's friends).
+
+___
+
+### Server Ports
+
+There are no ports required for the Muse bot. If one must be assigned, a random one can be used.

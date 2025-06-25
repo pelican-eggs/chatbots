@@ -1,86 +1,92 @@
 {
-    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL pterodactyl.io",
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-12-16T21:09:04+00:00",
+    "exported_at": "2025-06-25T15:25:55-07:00",
     "name": "Muse",
-    "author": "hello@apollo.moe",
-    "description": "\ud83c\udfa7 a self-hosted midwestern Discord music bot that doesn't suck",
-    "features": [],
+    "author": "red_thirten@yahoo.com",
+    "description": "Muse is a self-hosted Discord music bot that is made for small to medium-sized Discord servers\/guilds.",
+    "features": null,
     "docker_images": {
         "ghcr.io\/parkervcp\/yolks:nodejs_22": "ghcr.io\/parkervcp\/yolks:nodejs_22"
     },
     "file_denylist": [],
-    "startup": "npm start",
+    "startup": "yarn start",
     "config": {
-        "files": "{\r\n    \".env\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"DISCORD_TOKEN\": \"DISCORD_TOKEN={{env.discord_token}}\",\r\n            \"DATA_DIR\": \"DATA_DIR={{env.data_dir}}\",\r\n            \"YOUTUBE_API_KEY\": \"YOUTUBE_API_KEY={{env.api_key}}\",\r\n            \"SPOTIFY_CLIENT_ID\": \"SPOTIFY_CLIENT_ID={{env.client_id}}\",\r\n            \"SPOTIFY_CLIENT_SECRET\": \"SPOTIFY_CLIENT_SECRET={{env.client_secret}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{\r\n    \"done\": \"Running version \"\r\n}",
+        "files": "{\r\n    \".env\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"DISCORD_TOKEN\": \"DISCORD_TOKEN={{server.build.env.BOT_TOKEN}}\",\r\n            \"YOUTUBE_API_KEY\": \"YOUTUBE_API_KEY={{server.build.env.YOUTUBE_API_KEY}}\",\r\n            \"SPOTIFY_CLIENT_ID\": \"SPOTIFY_CLIENT_ID= {{server.build.env.SPOTIFY_CLIENT_ID}}\",\r\n            \"SPOTIFY_CLIENT_SECRET\": \"SPOTIFY_CLIENT_ID= {{server.build.env.SPOTIFY_CLIENT_SECRET}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Ready!\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "## Credits: Red-Thirten (https:\/\/github.com\/lilkingjr1) for providing most of the installation script\r\napt-get update\r\napt-get install git curl jq -y python3 python3-pip make build-essential -qq\r\n\r\nGITHUB_PACKAGE=\"museofficial\/muse\"\r\n\r\n# Find GitHub download URL for Muse for specified version\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq -r '.tarball_url')\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tarball_url')\r\n    else\r\n        echo -e \"Could not find version \\\"${VERSION}\\\" of Muse. Defaulting to latest release...\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq -r '.tarball_url')\r\n    fi\r\nfi\r\n\r\n# Download Muse from GitHub & Extract\r\ncd \/mnt\/server\r\necho -e \"Downloading Muse from GitHub...\"\r\ncurl -L ${DOWNLOAD_URL} -o muse.tar.gz\r\necho -e \"Extracting Muse from tarball...\"\r\ntar -xvzf muse.tar.gz --strip-components=1\r\nrm muse.tar.gz\r\n\r\n# Verify and clean up Muse installation\r\nif [ ! -f .env.example ]; then\r\n    echo -e \"\\nFailed to download release: ${DOWNLOAD_URL}\\n\"\r\n    exit 1\r\nfi\r\ncp .env.example .env\r\nrm -rf .dockerignore Dockerfile .gitignore .github\/\r\nyarn install --prod #--frozen-lockfile\r\n#sed -i 's\/of filterWrapper[)]\/of filterWrapper|| [])\/g' \/mnt\/server\/node_modules\/ytsr\/lib\/utils.js\r\n\r\necho -e \"\\nMuse Successfully Installed!\"",
+            "script": "#!\/bin\/bash\r\n\r\n## File: Pterodactyl Muse Egg - egg-muse.json\r\n## Authors: David Wolfe (Red-Thirten), TubaApollo, parkervcp\r\n## Date: 2025\/06\/25\r\n## License: MIT License\r\n\r\nGITHUB_PACKAGE=\"museofficial\/muse\"\r\n\r\napt update\r\napt install -y tar curl jq python3 build-essential\r\n\r\n## Muse Install\r\n[ ! -d \/mnt\/server ] && mkdir \/mnt\/server\r\ncd \/mnt\/server\r\necho -e \"\\nInstalling\/Updating Muse...\\n\"\r\n\r\n# Remove all existing files\/folders, except `data` folder\r\nfind . -mindepth 1 -depth ! -path '.\/data' ! -path '.\/data\/*' -exec rm -rf {} +\r\n\r\n# Get download URL\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/${GITHUB_PACKAGE}\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq -r .tarball_url)\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tarball_url')\r\n    else\r\n        echo -e \"Defaulting to latest release...\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq -r .tarball_url)\r\n    fi\r\nfi\r\n\r\n# Download tarball & check for success\r\necho -e \"Downloading ${VERSION} from ${DOWNLOAD_URL}...\"\r\ncurl -Lo muse-${VERSION}.tar.gz ${DOWNLOAD_URL}\r\nif [[ ! -f muse-${VERSION}.tar.gz ]]; then\r\n    echo -e \"\\n\\nFailed to download ${VERSION} version of Muse!\"\r\n    echo -e \"\\tTry reinstalling the server again.\\n\"\r\n    exit 1\r\nfi\r\n\r\n# Extract & delete tarball\r\necho -e \"Extracting muse-${VERSION}.tar.gz...\"\r\ntar -xzvf muse-${VERSION}.tar.gz --strip-components=1\r\nrm muse-${VERSION}.tar.gz\r\n\r\n# Install dependencies & clean up\r\necho -e \"Installing dependencies...\"\r\nyarn install --prod || exit 1\r\ncp .env.example .env\r\necho -e \"Removing unneeded files...\"\r\nrm -rf .dockerignore Dockerfile .gitignore .github\/ RELEASING.md\r\n\r\necho -e \"\\nMuse successfully installed!\"",
             "container": "node:lts-bookworm-slim",
-            "entrypoint": "bash"
+            "entrypoint": "\/bin\/bash"
         }
     },
     "variables": [
         {
-            "name": "TOKEN",
-            "description": "Discord Bot Token",
-            "env_variable": "discord_token",
+            "name": "Discord Bot Token",
+            "description": "The token for your Discord bot. Learn how to obtain a token and configure your bot application properly here: https:\/\/jmusicbot.com\/getting-a-bot-token\/",
+            "env_variable": "DISCORD_TOKEN",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
-        },
-        {
-            "name": "Data directory",
-            "description": "Default: .\/data",
-            "env_variable": "data_dir",
-            "default_value": ".\/data",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|max:20"            
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "YouTube API Key",
-            "description": "You can get it here: https:\/\/console.developers.google.com\/",
-            "env_variable": "api_key",
+            "description": "Can be acquired by creating a new project in Google's Developer Console (https:\/\/console.developers.google.com\/), enabling the YouTube API, and creating an API key under credentials.",
+            "env_variable": "YOUTUBE_API_KEY",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"            
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "Spotify Client ID",
-            "description": "You can get it here: https:\/\/developer.spotify.com\/dashboard\/applications",
-            "env_variable": "client_id",
+            "description": "Can be acquired at https:\/\/developer.spotify.com\/dashboard\/applications with 'Create a Client ID'.",
+            "env_variable": "SPOTIFY_CLIENT_ID",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "Spotify Client Secret",
-            "description": "You can get it here: https:\/\/developer.spotify.com\/dashboard\/applications",
-            "env_variable": "client_secret",
+            "description": "Can be acquired at https:\/\/developer.spotify.com\/dashboard\/applications with 'Create a Client ID'.",
+            "env_variable": "SPOTIFY_CLIENT_SECRET",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
-            "name": "Version",
-            "description": "Specify a version, for example: \"v2.4.1\"\r\nFor the latest version, type \"latest\"",
+            "name": "[Advanced] Release Version Tag",
+            "description": "Which release (based on tag) to download from https:\/\/github.com\/museofficial\/muse\/releases. To download the latest release version, \"latest\" can be used.",
             "env_variable": "VERSION",
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "[System] Force Headless Environment",
+            "description": "This should not be changed. It is used by the Egg to tell Ora (a dependency of Muse) that it is running in a Continuous Integration-like environment (ie. headless), which disables loading spinners that break the console output.",
+            "env_variable": "CI",
+            "default_value": "true",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:true",
+            "field_type": "text"
         }
     ]
 }
