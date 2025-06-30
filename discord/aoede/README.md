@@ -10,8 +10,8 @@
                 <img src="https://avatars.githubusercontent.com/u/8092733" width="50px;" alt=""/><br /><sub><b>cleme29</b></sub>
             </a>
             <br />
-            <a href="https://github.com/parkervcp/eggs/commits?author=cleme29" title="Codes">💻</a>
-            <a href="https://github.com/parkervcp/eggs/commits?author=cleme29" title="Maintains">🔨</a>
+            <a href="https://github.com/pelican-eggs/chatbots/commits?author=cleme29" title="Codes">💻</a>
+            <a href="https://github.com/pelican-eggs/chatbots/commits?author=cleme29" title="Maintains">🔨</a>
         </td>       
     </tr>
 </table>

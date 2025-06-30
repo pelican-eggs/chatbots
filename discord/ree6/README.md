@@ -21,15 +21,15 @@ ___
                 <img src="https://avatars.githubusercontent.com/u/1207679" width="50px;" alt=""/><br /><sub><b>parkervcp</b></sub>
             </a>
             <br />
-            <a href="https://github.com/parkervcp/eggs/commits?author=parkervcp" title="Codes">💻</a>
-            <a href="https://github.com/parkervcp/eggs/commits?author=parkervcp" title="Original Egg Creator">🥚</a>
+            <a href="https://github.com/pelican-eggs/chatbots/commits?author=parkervcp" title="Codes">💻</a>
+            <a href="https://github.com/pelican-eggs/chatbots/commits?author=parkervcp" title="Original Egg Creator">🥚</a>
         </td>
                 <td align="center">
             <a href="https://github.com/QuintenQVD0">
                 <img src="https://avatars.githubusercontent.com/u/67589015" width="50px;" alt=""/><br /><sub><b>QuintenQVD0</b></sub>
             </a>
             <br />
-            <a href="https://github.com/parkervcp/eggs/commits?author=QuintenQVD0" title="Codes">💻</a>
+            <a href="https://github.com/pelican-eggs/chatbots/commits?author=QuintenQVD0" title="Codes">💻</a>
         </td>
     </tr>
 </table>
