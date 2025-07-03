@@ -21,32 +21,32 @@ ___
                 <img src="https://avatars.githubusercontent.com/u/1207679" width="50px;" alt=""/><br /><sub><b>parkervcp</b></sub>
             </a>
             <br />
-            <a href="https://github.com/parkervcp/eggs/commits?author=parkervcp" title="Codes">💻</a>
-            <a href="https://github.com/parkervcp/eggs/commits?author=parkervcp" title="Original Egg Creator">🥚</a>
+            <a href="https://github.com/pelican-eggs/chatbots/commits?author=parkervcp" title="Codes">💻</a>
+            <a href="https://github.com/pelican-eggs/chatbots/commits?author=parkervcp" title="Original Egg Creator">🥚</a>
         </td>
         <td align="center">
             <a href="https://github.com/Software-Noob">
                 <img src="https://avatars.githubusercontent.com/u/10975908" width="50px;" alt=""/><br /><sub><b>Software-Noob</b></sub>
             </a>
             <br />
-            <a href="https://github.com/parkervcp/eggs/commits?author=Software-Noob" title="Codes">💻</a>
-            <a href="https://github.com/parkervcp/eggs/commits?author=Software-Noob" title="Contributor">💡</a>
+            <a href="https://github.com/pelican-eggs/chatbots/commits?author=Software-Noob" title="Codes">💻</a>
+            <a href="https://github.com/pelican-eggs/chatbots/commits?author=Software-Noob" title="Contributor">💡</a>
         </td>
         <td align="center">
             <a href="https://github.com/Proxymiity">
                 <img src="https://avatars.githubusercontent.com/u/25194496" width="50px;" alt=""/><br /><sub><b>Proxymiity</b></sub>
             </a>
             <br />
-            <a href="https://github.com/parkervcp/eggs/commits?author=Proxymiity" title="Codes">💻</a>
-            <a href="https://github.com/parkervcp/eggs/commits?author=Proxymiity" title="Contributor">💡</a>
+            <a href="https://github.com/pelican-eggs/chatbots/commits?author=Proxymiity" title="Codes">💻</a>
+            <a href="https://github.com/pelican-eggs/chatbots/commits?author=Proxymiity" title="Contributor">💡</a>
         </td>
         <td align="center">
-            <a href="https://github.com/lilkingjr1">
+            <a href="https://github.com/redthirten">
                 <img src="https://avatars.githubusercontent.com/u/4533989" width="50px;" alt=""/><br /><sub><b>Red-Thirten</b></sub>
             </a>
             <br />
-            <a href="https://github.com/parkervcp/eggs/commits?author=lilkingjr1" title="Codes">💻</a>
-            <a href="https://github.com/parkervcp/eggs/commits?author=iamkubi" title="Contributor">💡</a>
+            <a href="https://github.com/pelican-eggs/chatbots/commits?author=redthirten" title="Codes">💻</a>
+            <a href="https://github.com/pelican-eggs/chatbots/commits?author=iamkubi" title="Contributor">💡</a>
         </td>
     </tr>
 </table>

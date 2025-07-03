@@ -10,24 +10,24 @@
                 <img src="https://avatars.githubusercontent.com/u/86665265" width="50px;" alt=""/><br /><sub><b>TubaApollo</b></sub>
             </a>
             <br />
-            <a href="https://github.com/parkervcp/eggs/commits?author=TubaApollo" title="Codes">💻</a>
-            <a href="https://github.com/parkervcp/eggs/commits?author=TubaApollo" title="Contributor">💡</a>
+            <a href="https://github.com/pelican-eggs/chatbots/commits?author=TubaApollo" title="Codes">💻</a>
+            <a href="https://github.com/pelican-eggs/chatbots/commits?author=TubaApollo" title="Contributor">💡</a>
         </td>
         <td align="center">
-            <a href="https://github.com/lilkingjr1">
+            <a href="https://github.com/redthirten">
                 <img src="https://avatars.githubusercontent.com/u/4533989" width="50px;" alt=""/><br /><sub><b>Red-Thirten</b></sub>
             </a>
             <br />
-            <a href="https://github.com/parkervcp/eggs/commits?author=lilkingjr1" title="Codes">💻</a>
-            <a href="https://github.com/parkervcp/eggs/commits?author=lilkingjr1" title="Maintains">🔨</a>
+            <a href="https://github.com/pelican-eggs/chatbots/commits?author=redthirten" title="Codes">💻</a>
+            <a href="https://github.com/pelican-eggs/chatbots/commits?author=redthirten" title="Maintains">🔨</a>
         </td>
         <td align="center">
             <a href="https://github.com/QuintenQVD0">
                 <img src="https://avatars.githubusercontent.com/u/67589015" width="50px;" alt=""/><br /><sub><b>QuintenQVD0</b></sub>
             </a>
             <br />
-            <a href="https://github.com/parkervcp/eggs/commits?author=QuintenQVD0" title="Codes">💻</a>
-            <a href="https://github.com/parkervcp/eggs/commits?author=QuintenQVD0" title="Contributor">💡</a>
+            <a href="https://github.com/pelican-eggs/chatbots/commits?author=QuintenQVD0" title="Codes">💻</a>
+            <a href="https://github.com/pelican-eggs/chatbots/commits?author=QuintenQVD0" title="Contributor">💡</a>
         </td>        
     </tr>
 </table>
