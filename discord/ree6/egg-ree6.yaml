@@ -1,0 +1,599 @@
+_comment: 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL'
+meta:
+  version: PLCN_v3
+  update_url: 'https://raw.githubusercontent.com/pelican-eggs/chatbots/refs/heads/main/discord/ree6/egg-ree6.yaml'
+exported_at: '2025-12-23T00:23:37+00:00'
+name: Ree6
+author: presti@presti.me
+uuid: 819a8b3d-6e7b-4494-848d-7bdb56287b4f
+description: 'All-in-one, open source and 100% free Discord Bot!'
+image: null
+tags: {  }
+features: {  }
+docker_images:
+  Java_17: 'ghcr.io/pterodactyl/yolks:java_17'
+file_denylist: {  }
+startup_commands:
+  Default: 'java -Dnogui=true -jar Ree6.jar'
+config:
+  files:
+    config.yml:
+      parser: yaml
+      find:
+        hikari.sql.user: '{{server.environment.DATABASE_USER}}'
+        hikari.sql.db: '{{server.environment.DATABASE_DB}}'
+        hikari.sql.pw: '{{server.environment.DATABASE_PW}}'
+        hikari.sql.host: '{{server.environment.DATABASE_HOST}}'
+        hikari.sql.port: '{{server.environment.DATABASE_PORT}}'
+        hikari.misc.storage: '{{server.environment.DATABASE_TYP}}'
+        hikari.misc.storageFile: '{{server.environment.DATABASE_FILE}}'
+        hikari.misc.poolSize: '{{server.environment.DATABASE_POOL}}'
+        hikari.misc.createEmbeddedServer: '{{server.environment.DATABASE_EMBEDDED}}'
+        heartbeat.url: '{{server.environment.HEARTBEAT_URL}}'
+        heartbeat.interval: '{{server.environment.HEARTBEAT_INTERVAL}}'
+        dagpi.apitoken: '{{server.environment.DAGPI_TOKEN}}'
+        amari.apitoken: '{{server.environment.AMARI_TOKEN}}'
+        sentry.dsn: '{{server.environment.SENTRY_DSN}}'
+        spotify.client.id: '{{server.environment.SPOTIFY_CLIENT_ID}}'
+        spotify.client.secret: '{{server.environment.SPOTIFY_CLIENT_SECRET}}'
+        twitch.client.id: '{{server.environment.TWITCH_CLIENT_ID}}'
+        twitch.client.secret: '{{server.environment.TWITCH_CLIENT_SECRET}}'
+        twitter.consumer.key: '{{server.environment.TWITTER_CONSUMER_ID}}'
+        twitter.consumer.secret: '{{server.environment.TWITTER_CONSUMER_SECRET}}'
+        twitter.access.key: '{{server.environment.TWITTER_ACCESS_ID}}'
+        twitter.access.secret: '{{server.environment.TWITTER_ACCESS_SECRET}}'
+        reddit.client.id: '{{server.environment.REDDIT_CLIENT_ID}}'
+        reddit.client.secret: '{{server.environment.REDDIT_CLIENT_SECRET}}'
+        instagram.username: '{{server.environment.INSTAGRAM_USERNAME}}'
+        instagram.password: '{{server.environment.INSTAGRAM_PASSWORD}}'
+        bot.tokens.release: '{{server.environment.BOT_TOKEN}}'
+        openai.apiToken: '{{server.environment.AI_TOKEN}}'
+        openai.apiUrl: '{{server.environment.AI_URL}}'
+        openai.model: '{{server.environment.AI_MODEL}}'
+        bot.misc.status: '{{server.environment.MISC_STATUS}}'
+        bot.misc.feedbackChannelId: '{{server.environment.MISC_FEEDBACK}}'
+        bot.misc.ownerId: '{{server.environment.MISC_OWNER}}'
+        bot.misc.predefineInformation: '{{server.environment.MISC_PREDEF}}'
+        bot.misc.invite: '{{server.environment.MISC_INVITE}}'
+        bot.misc.support: '{{server.environment.MISC_SUPPORT}}'
+        bot.misc.website: '{{server.environment.MISC_WEB}}'
+        bot.misc.webinterface: '{{server.environment.MISC_INTERFACE}}'
+        bot.misc.recording: '{{server.environment.MISC_RECORD}}'
+        bot.misc.twitchAuth: '{{server.environment.MISC_TWITCH}}'
+        bot.misc.advertisement: '{{server.environment.MISC_ADV}}'
+        bot.misc.name: '{{server.environment.MISC_NAME}}'
+        bot.misc.shards: '{{server.environment.MISC_SHARD}}'
+  startup:
+    done: 'Finished Loading'
+  logs: {  }
+  stop: ^C
+scripts:
+  installation:
+    script: |-
+      #!/bin/bash
+      ## this is a simple script to use the github API for release versions.
+      ## this requires the egg has a variable for GITHUB_PACKAGE and VERSION
+      ## this supports using oauth/personal access tokens via GITHUB_USER and GITHUB_OAUTH_TOKEN (both are required.)
+      ## if you are getting hit with GitHub API limit issues then you need to have the user and token set.
+      apt update
+      apt install -y jq curl
+
+
+      CONFIG_LINK="https://raw.githubusercontent.com/parkervcp/eggs/master/bots/discord/ree6/config.yml"
+      LATEST_JSON=$(curl --silent "https://api.github.com/repos/Ree6-Applications/Ree6/releases/latest")
+      RELEASES=$(curl --silent "https://api.github.com/repos/Ree6-Applications/Ree6/releases")
+      MATCH=jar-with-dependencies.jar
+
+
+      if [ -z "${VERSION}" ] || [ "${VERSION}" == "latest" ]; then
+          DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i "${MATCH}" | head -1 )
+      else
+          VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION "${VERSION}" '.[] | select(.tag_name==$VERSION) | .tag_name')
+          if [ "${VERSION}" == "${VERSION_CHECK}" ]; then
+              DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION "${VERSION}" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i "${MATCH}" | head -1)
+          else
+              echo -e "defaulting to latest release"
+              DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i *.jar)
+          fi
+      fi
+
+      ## Ree6 Setup
+      [ ! -d /mnt/server ] && mkdir -p /mnt/server
+
+      if [ ! -z "${DOWNLOAD_URL}" ]; then 
+          if curl --output /dev/null --silent --head --fail ${DOWNLOAD_URL}; then
+              echo -e "link is valid. setting download link to ${DOWNLOAD_URL}"
+              DOWNLOAD_LINK=${DOWNLOAD_URL}
+          else        
+              echo -e "link is invalid closing out"
+              exit 2
+          fi
+      fi
+
+      cd /mnt/server
+      echo -e "
+      Installing/Updating Ree6...
+      "
+
+      if [ -f Ree6.jar ]; then
+          echo -e "Updating Ree6.jar to latest version..."
+          echo -e '\t(Old version can be found at "Ree6.jar-old")'
+          mv -f Ree6.jar Ree6.jar-old
+      fi
+
+      echo -e "Running: curl -sSL -o Ree6.jar ${DOWNLOAD_LINK}
+      "
+      curl -sSL -o  Ree6.jar ${DOWNLOAD_LINK}
+
+      if [ -f config.yml ]; then
+          echo -e "Updating config.yml to latest version..."
+          echo -e '\t(Old version can be found at "config.yml-old")'
+          mv -f config.yml config.yml-old
+      fi
+
+      echo -e "Running: curl -sSL -o config.yml ${CONFIG_LINK}
+      "
+      curl -sSL -o config.yml ${CONFIG_LINK}
+          
+
+      echo -e "
+      Ree6 Successfully Installed!"
+    container: 'ghcr.io/parkervcp/installers:debian'
+    entrypoint: bash
+variables:
+  -
+    name: 'Activity Status'
+    description: 'The Activity status of the Bot that will be shown.'
+    env_variable: MISC_STATUS
+    default_value: 'ree6.de | %guilds% Servers. (%shard%)'
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 1
+  -
+    name: Advertisment
+    description: 'The Advertisement in Embed Footers and the rest.'
+    env_variable: MISC_ADV
+    default_value: 'powered by Tube-hosting'
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 2
+  -
+    name: 'Amari Token'
+    description: 'Your Amari API-Token, for Amari Level imports!'
+    env_variable: AMARI_TOKEN
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 3
+  -
+    name: 'Dagpi token'
+    description: 'Your Dagpi.xyz API-Token, for tweet image generation!'
+    env_variable: DAGPI_TOKEN
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 4
+  -
+    name: 'Database Storagefile'
+    description: 'The location of the storagefile if sqlite is being used.'
+    env_variable: DATABASE_FILE
+    default_value: storage/Ree6.db
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'max:32'
+    sort: 5
+  -
+    name: 'Database Typ'
+    description: "The Typ of the Database Ree6 should use!\r\nPossible typs:\r\n- mariadb\r\n- sqlite\r\n- h2\r\n- postgres"
+    env_variable: DATABASE_TYP
+    default_value: sqlite
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'in:mariadb,sqlite,postgres,postregsql,h2'
+    sort: 6
+  -
+    name: 'Database host'
+    description: 'The Host address of the Database connection.'
+    env_variable: DATABASE_HOST
+    default_value: localhost
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 7
+  -
+    name: 'Feedback Channel'
+    description: 'The Channel Id of the Feedback channel.'
+    env_variable: MISC_FEEDBACK
+    default_value: 0
+    user_viewable: true
+    user_editable: true
+    rules:
+      - integer
+    sort: 8
+  -
+    name: 'Heartbeat Interval'
+    description: 'The interval between the heartbeats.'
+    env_variable: HEARTBEAT_INTERVAL
+    default_value: 60
+    user_viewable: true
+    user_editable: true
+    rules:
+      - integer
+    sort: 9
+  -
+    name: 'Heartbeat Url'
+    description: 'The URL to the Heartbeat-Server'
+    env_variable: HEARTBEAT_URL
+    default_value: none
+    user_viewable: true
+    user_editable: true
+    rules:
+      - string
+    sort: 10
+  -
+    name: 'Instagram Password'
+    description: 'Instagram Application Configuration, used for the Instagram Notification.'
+    env_variable: INSTAGRAM_PASSWORD
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 11
+  -
+    name: 'Instagram Username'
+    description: 'Instagram Application Configuration, used for the Instagram Notification.'
+    env_variable: INSTAGRAM_USERNAME
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 12
+  -
+    name: 'Invite Link'
+    description: 'The Invite link to invite the Bot.'
+    env_variable: MISC_INVITE
+    default_value: 'https://invite.ree6.de'
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 13
+  -
+    name: Name
+    description: 'The Name of the Bot.'
+    env_variable: MISC_NAME
+    default_value: Ree6
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'max:20'
+    sort: 14
+  -
+    name: 'OpenAI Model'
+    description: 'The AI model that should be used in the API calls.'
+    env_variable: AI_MODEL
+    default_value: gpt-3.5-turbo-0301
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:32'
+    sort: 15
+  -
+    name: 'OpenAI Token'
+    description: 'Your Authentication token that should be used in the AI API calls.'
+    env_variable: AI_TOKEN
+    default_value: 'OpenAI API-Token'
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 16
+  -
+    name: 'OpenAI Url'
+    description: 'The URL that should receive the API calls.'
+    env_variable: AI_URL
+    default_value: 'https://api.openai.com/v1/chat/completions'
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 17
+  -
+    name: 'Predefined Information for AI'
+    description: 'The Information for the AI.'
+    env_variable: MISC_PREDEF
+    default_value: 'You are Ree6 a Discord bot.'
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 18
+  -
+    name: 'Record Url'
+    description: 'The Url that uses can access to get their recording.'
+    env_variable: MISC_RECORD
+    default_value: 'https://cp.ree6.de/external/recording'
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 19
+  -
+    name: 'Reddit Client Id'
+    description: 'Reddit Application Configuration, used for the Reddit Notification.'
+    env_variable: REDDIT_CLIENT_ID
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 20
+  -
+    name: 'Reddit Client Secret'
+    description: 'Reddit Application Configuration, used for the Reddit Notification.'
+    env_variable: REDDIT_CLIENT_SECRET
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 21
+  -
+    name: 'SQL Database'
+    description: 'Database for the SQL Connection'
+    env_variable: DATABASE_DB
+    default_value: root
+    user_viewable: true
+    user_editable: true
+    rules:
+      - string
+      - 'max:64'
+    sort: 22
+  -
+    name: 'SQL Password'
+    description: 'Password for the SQL connection.'
+    env_variable: DATABASE_PW
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 23
+  -
+    name: 'SQL Port'
+    description: 'Port for the SQL connection.'
+    env_variable: DATABASE_PORT
+    default_value: 3306
+    user_viewable: true
+    user_editable: true
+    rules:
+      - integer
+    sort: 24
+  -
+    name: 'SQL Username'
+    description: 'Username for the SQL connection.'
+    env_variable: DATABASE_USER
+    default_value: root
+    user_viewable: true
+    user_editable: true
+    rules:
+      - string
+      - 'max:32'
+    sort: 25
+  -
+    name: 'Sentry DSN'
+    description: 'Your Sentry DSN, for error reporting!'
+    env_variable: SENTRY_DSN
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 26
+  -
+    name: Shards
+    description: 'The amount of shards that should be created.'
+    env_variable: MISC_SHARD
+    default_value: 1
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - integer
+    sort: 27
+  -
+    name: 'Spotify Client Id'
+    description: 'Spotify Application Configuration, used to parse Spotify Tracks/Playlists to YouTube search queries.'
+    env_variable: SPOTIFY_CLIENT_ID
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 28
+  -
+    name: 'Spotify Client Secret'
+    description: 'Spotify Application Configuration, used to parse Spotify Tracks/Playlists to YouTube search queries.'
+    env_variable: SPOTIFY_CLIENT_SECRET
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 29
+  -
+    name: 'Support Link'
+    description: 'The Url link for users to receive support.'
+    env_variable: MISC_SUPPORT
+    default_value: 'https://support.ree6.de'
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 30
+  -
+    name: 'Twitch Client Id'
+    description: 'Twitch Application Configuration, used for the StreamTools and Twitch Notifications.'
+    env_variable: TWITCH_CLIENT_ID
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 31
+  -
+    name: 'Twitch Client Secret'
+    description: 'Twitch Application Configuration, used for the StreamTools and Twitch Notifications.'
+    env_variable: TWITCH_CLIENT_SECRET
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 32
+  -
+    name: 'Twitch Url'
+    description: 'The Url used to connect a Twitch Account with the Ree6 System.'
+    env_variable: MISC_TWITCH
+    default_value: 'https://cp.ree6.de/external/twitch'
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 33
+  -
+    name: 'Twitter Bearer Key'
+    description: 'Twitter Application Configuration, used for the Twitter Notifications.'
+    env_variable: TWITTER_BEARER
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 34
+  -
+    name: Webinterface
+    description: 'The Url to the Webinterface.'
+    env_variable: MISC_INTERFACE
+    default_value: 'https://cp.ree6.de'
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 35
+  -
+    name: Website
+    description: 'The Url to the Website of the Bot.'
+    env_variable: MISC_WEB
+    default_value: 'https://ree6.de'
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 36
+  -
+    name: '[DEVELOPER-STUFF] Bot Owner Id'
+    description: 'The ID of the Bot Owner, this will be used internally on some checks.'
+    env_variable: MISC_OWNER
+    default_value: 321580743488831490
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - integer
+    sort: 37
+  -
+    name: '[DEVELOPER-STUFF] Database Poolsize'
+    description: 'The Database connection pool size!'
+    env_variable: DATABASE_POOL
+    default_value: 10
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - integer
+    sort: 38
+  -
+    name: '[REQUIRED] Discord Bot Token'
+    description: |-
+      The token for your Discord bot. Learn how to obtain a token and configure your bot application
+      properly here: https://jmusicbot.com/getting-a-bot-token/
+    env_variable: BOT_TOKEN
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+    sort: 39
