@@ -6,7 +6,7 @@
     },
     "exported_at": "2024-06-01T19:44:07+00:00",
     "name": "Sinusbot",
-    "author": "support@pelican.dev",
+    "author": "team@pelican.dev",
     "description": "Musicbot for Discord and Teamspeak.",
     "features": null,
     "docker_images": {
