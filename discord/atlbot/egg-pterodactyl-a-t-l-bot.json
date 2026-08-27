@@ -7,7 +7,7 @@
     "exported_at": "2024-06-01T19:44:10+00:00",
     "name": "ATLBot",
     "author": "jfeldt19@gmail.com",
-    "description": "ATLbot in ptero\r\n\r\nhttps://github.com/ATLauncher/discord-bot/",
+    "description": "ATLbot in peli\r\n\r\nhttps://github.com/ATLauncher/discord-bot/",
     "features": null,
     "docker_images": {
         "Nodejs 16": "ghcr.io/parkervcp/yolks:node_16"

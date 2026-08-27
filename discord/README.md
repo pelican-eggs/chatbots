@@ -45,7 +45,7 @@ A Discord music bot that's easy to set up and run yourself!
 ### [parkertron](parkertron)
 
 [parkervcp/parkertron](https://github.com/parkervcp/parkertron)
-The bot that runs as the pterodactyl `@Support Bot`
+The bot that runs as the pelican `@Support Bot`
 
 ### [PixelBot](pixelbot)
 
