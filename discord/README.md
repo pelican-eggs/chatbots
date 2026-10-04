@@ -67,3 +67,8 @@ All-in-one, open source and 100% free Discord Bot!
 
 [SinusBot](https://www.sinusbot.com/)
 Please Check their site for an in depth on the bot.
+
+### [VoiceTwine](voicetwine)
+
+[Twijn/VoiceTwine](https://github.com/Twijn/VoiceTwine)
+Dynamic voice channel manager for Discord

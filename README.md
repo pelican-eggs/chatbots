@@ -20,6 +20,7 @@
 * [Redbot](/discord/redbot) Python
 * [Ree6](/discord/ree6) Java
 * [SinusBot](/discord/sinusbot)
+* [VoiceTwine](/discord/voicetwine) Node JS
 
 [Other](/other)
 
