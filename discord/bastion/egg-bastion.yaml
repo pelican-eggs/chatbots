@@ -1,0 +1,198 @@
+_comment: 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL'
+meta:
+  version: PLCN_v3
+  update_url: 'https://raw.githubusercontent.com/pelican-eggs/chatbots/refs/heads/main/discord/bastion/egg-bastion.yaml'
+exported_at: '2025-12-23T00:15:48+00:00'
+name: Bastion
+author: parker@parkervcp.com
+uuid: 5756f4b5-4bd5-4fb5-a4fe-a30f305049d5
+description: |-
+  Bastion is a multi-purpose Discord Bot that can help you automate most tasks in your server, from
+  administration and moderation to keeping the members active through various incentives, games and
+  other fun activities
+image: 'data:image/png;base64,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'
+tags: {  }
+features: {  }
+docker_images:
+  Bastion: 'ghcr.io/parkervcp/yolks:bot_bastion'
+file_denylist: {  }
+startup_commands:
+  Default: '{{STARTUP_CMD}}'
+config:
+  files: {  }
+  startup:
+    done: Ready
+  logs: {  }
+  stop: ^^C
+scripts:
+  installation:
+    script: |-
+      #!/bin/bash
+      # Bastion Bot Installation Script
+      #
+      # Server Files: /mnt/server
+      ## Move to install folder
+      apt update
+      apt install -y build-essential libtool python3 git tar
+
+
+      mkdir -p /mnt/server/
+      cd /mnt/server/
+
+      if [ -d "/mnt/server/mongodb" ]
+      then
+          cd /mnt/server/
+          echo "backing up mongodb"
+          REINSTALL=true
+          tar -czf mongodb_backup.tar.gz mongodb/
+          mv mongodb_backup.tar.gz /tmp
+      fi
+
+      cd /mnt/server
+      rm -rf * .git/ .github/ .env.example .eslintrc.yml .gitattributes .gitignore .npm/
+
+
+      ## Clone repo
+      echo "cloning Bastion bot"
+      git clone -q --depth 1 https://github.com/TheBastionBot/Bastion.git ./
+
+      echo "updating npm"
+      npm install -g npm@latest
+      echo "npm install --no-package-lock"
+      npm install --no-package-lock
+      echo "npm run build"
+      npm run build
+
+      ## Move config files.
+      mv settings.example.yaml settings.yaml
+      rm -rf bastion.cmd .env.example bastion.sh scrips/
+
+
+      mkdir -p mongodb/
+      if [ "$REINSTALL" == "true" ]
+      then
+          cd /mnt/server
+          echo "reinstall"
+          mv /tmp/mongodb_backup.tar.gz /mnt/server
+          tar xf mongodb_backup.tar.gz
+          rm mongodb_backup.tar.gz
+      else
+          echo "fresh install"
+      fi
+
+      echo "-----------------------------------------"
+      echo "Installation completed..."
+      echo "-----------------------------------------"
+    container: 'node:20-bookworm'
+    entrypoint: bash
+variables:
+  -
+    name: 'Bastion API Auth'
+    description: 'Auth for accessing the Bastion API Server.'
+    env_variable: BASTION_API_AUTH
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:128'
+    sort: 1
+  -
+    name: 'Bastion API Port'
+    description: 'Port used for Bastion API Server'
+    env_variable: BASTION_API_PORT
+    default_value: 8377
+    user_viewable: true
+    user_editable: false
+    rules:
+      - required
+      - string
+      - 'max:10'
+    sort: 2
+  -
+    name: 'Bot Client ID'
+    description: 'The Bot ID you get from https://discordapp.com/developers/applications/'
+    env_variable: BOT_ID
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'max:32'
+    sort: 3
+  -
+    name: 'Bot Token'
+    description: 'The Bot Token you get from https://discordapp.com/developers/applications/'
+    env_variable: BOT_TOKEN
+    default_value: GETABOTTOKEN
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'max:80'
+    sort: 4
+  -
+    name: 'Mongo URL'
+    description: 'use `mongodb://127.0.0.1:27017/bastion` for using the build in mongodb server'
+    env_variable: MONGO_URI
+    default_value: 'mongodb://127.0.0.1:27017/bastion'
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'max:128'
+    sort: 5
+  -
+    name: 'Music Activity'
+    description: 'When enabled, Bastion updates the activity to the currently playing track'
+    env_variable: BASTION_MUSIC_ACTIVITY
+    default_value: true
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'in:true,false'
+    sort: 6
+  -
+    name: 'Relay Direct Messages'
+    description: |-
+      When enabled, Bastion will relay any direct messages it receives to the owner of the bot application
+      / team.
+    env_variable: BASTION_RELAY_DMS
+    default_value: false
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'in:true,false'
+    sort: 7
+  -
+    name: 'Safe Mode'
+    description: 'When enabled, this disables usage of unsafe commands like `exec` and `eval`.'
+    env_variable: UNSAFE_MODE
+    default_value: false
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'in:true,false'
+    sort: 8
+  -
+    name: 'Startup cmd'
+    description: "set to `npm start` if you just want to start the bot.\r\nset to `npm run commands` to activate the slash commands"
+    env_variable: STARTUP_CMD
+    default_value: 'npm start'
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'in:npm start,npm run commands'
+    sort: 9

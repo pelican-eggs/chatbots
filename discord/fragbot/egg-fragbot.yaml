@@ -1,0 +1,79 @@
+_comment: 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL'
+meta:
+  version: PLCN_v3
+  update_url: 'https://raw.githubusercontent.com/pelican-eggs/chatbots/refs/heads/main/discord/fragbot/egg-fragbot.yaml'
+exported_at: '2025-12-23T00:24:40+00:00'
+name: fragbot
+author: parker@parkervcp.com
+uuid: 1dcebfab-0726-4fd5-b21e-7608fd4d760f
+description: "The fragforce discord bot.\r\n\r\nlocated at https://github.com/fragforce/fragbot"
+image: null
+tags: {  }
+features: {  }
+docker_images:
+  'ghcr.io/parkervcp/yolks:alpine': 'ghcr.io/parkervcp/yolks:alpine'
+file_denylist: {  }
+startup_commands:
+  Default: ./fragbot
+config:
+  files:
+    config.json:
+      parser: json
+      find:
+        token: '{{server.environment.DISCORD_TOKEN}}'
+  startup:
+    done: 'Bot is now running'
+  logs: {  }
+  stop: shutdown
+scripts:
+  installation:
+    script: |-
+      #!/bin/ash
+      # fragbot Installation Script
+      #
+      # Server Files: /mnt/server
+      export GOPATH=$HOME/go
+      export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+
+      cd
+
+      apk add --no-cache --update git
+
+      echo "pulling the fragbot repo"
+
+      git clone https://github.com/fragforce/fragbot.git
+
+      cd fragbot/
+
+      go mod download
+
+      echo "building fragbot"
+
+      go build 
+
+      echo "build complete copying parkertron and example configs over"
+
+      cp fragbot /mnt/server/
+
+      if [ -f /mnt/server/config.json ]; then
+          echo "config file exists already"
+      else
+          cp -r /root/fragbot/config.example.json /mnt/server/config.json
+      fi
+
+      echo "Install complete. If you watched this. Congrats."
+    container: 'golang:1.12-alpine'
+    entrypoint: ash
+variables:
+  -
+    name: 'Discord Bot Token'
+    description: 'The token that is to be used for the bot.'
+    env_variable: DISCORD_TOKEN
+    default_value: ThisNeedsToBeChanged
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'max:128'
+    sort: 1

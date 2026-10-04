@@ -1,0 +1,104 @@
+_comment: 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL'
+meta:
+  version: PLCN_v3
+  update_url: 'https://raw.githubusercontent.com/pelican-eggs/chatbots/refs/heads/main/twitch/sogebot/egg-soge-bot.yaml'
+exported_at: '2025-12-23T00:24:03+00:00'
+name: SogeBot
+author: eggs@goover.dev
+uuid: de0afcb1-1740-48c1-8580-bed4b1d9f3f0
+description: 'sogeBot - Free Twitch Bot built on Node.js https://sogebot.xyz/'
+image: null
+tags: {  }
+features: {  }
+docker_images:
+  'ghcr.io/parkervcp/yolks:nodejs_18': 'ghcr.io/parkervcp/yolks:nodejs_18'
+file_denylist: {  }
+startup_commands:
+  Default: 'npm start'
+config:
+  files:
+    .env:
+      parser: properties
+      find:
+        PORT: '{{server.allocations.default.port}}'
+  startup:
+    done: 'WebPanel is available at'
+  logs: {  }
+  stop: ^C
+scripts:
+  installation:
+    script: |-
+      #/bin/bash
+      # Installscript for sogeBot | Author: eggs@goover.dev
+
+      export DEBIAN_FRONTEND=noninteractive
+
+      apt -y update
+      apt install -y curl unzip jq  python3 build-essential ca-certificates
+
+      mkdir -p /mnt/server
+      cd /mnt/server
+      export NODE_OPTIONS=--max-old-space-size=8192
+      chown -R root:root /mnt
+
+      #Backup database & config
+      mkdir -p .backup
+      cp -f .env /mnt/server/.backup
+      cp -f sogebot.db /mnt/server/.backup
+
+      #delete old dir's to prevent errors on update
+      rm -fR dest
+      rm -fR public
+      rm -fR node-modules
+      rm -fR tools
+
+      ## get release info and download links
+      LATEST_JSON=$(curl --silent "https://api.github.com/repos/sogebot/sogeBot/releases/latest")
+      RELEASES=$(curl --silent "https://api.github.com/repos/sogebot/sogeBot/releases")
+      MATCH=sogeBot
+
+      if [ -z "${VERSION}" ] || [ "${VERSION}" == "latest" ]; then
+          DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})
+      else
+          VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION "${VERSION}" '.[] | select(.tag_name==$VERSION) | .tag_name')
+          if [ "${VERSION}" == "${VERSION_CHECK}" ]; then
+              DOWNLOAD_LINK=$(echo ${RELEASES} | jq -r --arg VERSION "${VERSION}" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})
+          else
+              echo -e "defaulting to latest release"
+              DOWNLOAD_LINK=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)
+          fi
+      fi
+
+      echo -e "Downloading from $DOWNLOAD_LINK"
+      curl -sSL -o sogeBot.zip ${DOWNLOAD_LINK}
+
+      unzip -o sogeBot.zip
+      rm -rf sogeBot.zip
+
+
+      echo "--------------------------------------------------------------------------"
+      echo "Installing dependencies, this will take some time so sit back and relax..."
+      echo "IGNORE WARNINGS. THESE ARE NOT ERRORS !!!"
+      echo "--------------------------------------------------------------------------"
+
+      npm install -g npm@8
+
+      npm install --verbose --force
+
+      echo -e "install completed"
+      exit 0
+    container: 'node:18-bookworm-slim'
+    entrypoint: bash
+variables:
+  -
+    name: Version
+    description: 'Version to install. Latest will install the latest available version.'
+    env_variable: VERSION
+    default_value: latest
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'max:20'
+    sort: 1

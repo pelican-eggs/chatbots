@@ -1,0 +1,192 @@
+_comment: 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL'
+meta:
+  version: PLCN_v3
+  update_url: 'https://raw.githubusercontent.com/pelican-eggs/chatbots/refs/heads/main/twitch/phantombot/egg-phantom-bot.yaml'
+exported_at: '2025-12-23T00:22:38+00:00'
+name: PhantomBot
+author: mail@wuffy.eu
+uuid: 40400812-be8c-48d3-8a59-9a76252d0db8
+description: |-
+  PhantomBot is an actively developed open source interactive Twitch bot with a vibrant community that
+  provides entertainment and moderation for your channel, allowing you to focus on what matters the
+  most to you - your game and your viewers.
+image: null
+tags: {  }
+features: {  }
+docker_images:
+  'Java 16 [DEPRECATED]': 'ghcr.io/parkervcp/yolks:java_16'
+  'Java 19': 'ghcr.io/parkervcp/yolks:java_19'
+file_denylist: {  }
+startup_commands:
+  Default: 'java --add-opens java.base/java.lang=ALL-UNNAMED -Djava.security.policy=config/security -Dinteractive -Xms1m -Dfile.encoding=UTF-8 -jar PhantomBot.jar'
+config:
+  files:
+    config/botlogin.txt:
+      parser: properties
+      find:
+        baseport: '{{server.allocations.default.port}}'
+        channel: '{{server.environment.CHANNEL_NAME}}'
+        owner: '{{server.environment.CHANNEL_OWNER}}'
+        paneluser: '{{server.environment.WEBPANEL_USERNAME}}'
+        panelpassword: '{{server.environment.WEBPANEL_PASSWORD}}'
+        user: '{{server.environment.BOT_TWITCH_USERNAME}}'
+        youtubekey: '{{server.environment.YOUTUBE_API_KEY}}'
+        discord_token: '{{server.environment.DISCORD_BOT_TOKEN}}'
+  startup:
+    done: 'Joined '
+  logs: {  }
+  stop: exit
+scripts:
+  installation:
+    script: |-
+      #!/bin/bash
+      # PhantomBot Installation Script
+      #
+      # Server Files: /mnt/server
+      apt update
+      apt -y --no-install-recommends install curl wget ca-certificates unzip
+
+      cd /tmp
+
+      # Fetching latest github release
+      if [ -z "${RELEASE_VERSION}" ] || [ "${RELEASE_VERSION}" == "master" ]; then
+              echo -e "Using latest Github Master version"
+              DOWNLOAD_URL=https://raw.githubusercontent.com/PhantomBot/nightly-build/master/PhantomBot-nightly-lin.zip
+      else
+          if [ -z "${RELEASE_VERSION}" ] || [ "${RELEASE_VERSION}" == "latest" ]; then
+              echo -e "Using latest release version"
+              RELEASE_VERSION=$(curl -s "https://api.github.com/repos/PhantomBot/PhantomBot/releases/latest" | grep -e '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/' | sed 's/^.//')
+          fi
+          DOWNLOAD_URL=https://github.com/PhantomBot/PhantomBot/releases/download/v${RELEASE_VERSION}/PhantomBot-${RELEASE_VERSION}-lin.zip
+          echo -e "${DOWNLOAD_URL}"
+      fi
+
+      # Download files
+      cd /mnt/server
+      wget ${DOWNLOAD_URL} -O PhantomBot.zip
+
+      # Unzip files and delete the archive
+      unzip -o PhantomBot.zip
+      rm PhantomBot.zip
+
+      # Move unzipped files into the server folder and delete the folder 
+      cp -f -r ./PhantomBot-*/* /mnt/server/
+      rm -rf PhantomBot-*/
+
+      # Creating default config
+      if [ ! -f /mnt/server/config/botlogin.txt ]; then
+          echo -e "Creating config/botlogin.txt"
+          cat << EOF > /mnt/server/config/botlogin.txt
+          #PhantomBot Configuration File
+          #
+          # Here is a list wiht all config values:
+          # https://community.phantom.bot/t/settings-for-botlogin-txt/78
+          #
+          apioauth=
+          baseport=
+          channel=
+          oauth=
+          owner=
+          panelpassword=
+          paneluser=
+          user=
+          youtubekey=
+          discord_token=
+      EOF
+      fi
+      echo "install finished"
+    container: 'ghcr.io/parkervcp/installers:debian'
+    entrypoint: bash
+variables:
+  -
+    name: 'Bot Twitch Username'
+    description: "Please enter the bot's Twitch username"
+    env_variable: BOT_TWITCH_USERNAME
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'max:26'
+    sort: 1
+  -
+    name: 'Channel Owner'
+    description: ''
+    env_variable: CHANNEL_OWNER
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'max:26'
+    sort: 2
+  -
+    name: 'Discord Bot Token'
+    description: 'https://phantombot.dev/guides/#guide=content/integrations/discordintegrationsetup'
+    env_variable: DISCORD_BOT_TOKEN
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - 'max:128'
+    sort: 3
+  -
+    name: 'Twitch Channel Name'
+    description: 'Enter the Twitch channel name where the bot will connect to'
+    env_variable: CHANNEL_NAME
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'max:26'
+    sort: 4
+  -
+    name: Version
+    description: "latest = Latest Stable\r\nmaster = latest Github\r\n3.9.0.7 = Latest known working with Java 16"
+    env_variable: RELEASE_VERSION
+    default_value: latest
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'max:9'
+    sort: 5
+  -
+    name: 'Webpanel Password'
+    description: 'Please enter a custom password for the web panel'
+    env_variable: WEBPANEL_PASSWORD
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'max:2000'
+    sort: 6
+  -
+    name: 'Webpanel Username'
+    description: 'Please enter a custom username for the web panel'
+    env_variable: WEBPANEL_USERNAME
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'max:64'
+    sort: 7
+  -
+    name: 'Youtube API Key'
+    description: 'https://phantombot.dev/guides/#guide=content/integrations/youtubesetup'
+    env_variable: YOUTUBE_API_KEY
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - 'max:128'
+    sort: 8

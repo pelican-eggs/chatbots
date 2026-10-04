@@ -1,0 +1,70 @@
+_comment: 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL'
+meta:
+  version: PLCN_v3
+  update_url: 'https://raw.githubusercontent.com/pelican-eggs/chatbots/refs/heads/main/teamspeak3/jts3servermod/egg-j-t-s3-server-mod.yaml'
+exported_at: '2025-12-23T00:21:56+00:00'
+name: JTS3ServerMod
+author: teamwuffy@gmail.com
+uuid: 104dfdf6-6b5a-4550-baa1-7a4edfe05943
+description: "Setup:\r\n- Install the latest version\r\n- Go into config/server1 and edit JTS3ServerMod_server.cfg\r\n- Save and start the server\r\n\r\nAuthor: https://www.stefan1200.de/forum/index.php?topic=2.0"
+image: null
+tags: {  }
+features: {  }
+docker_images:
+  'ghcr.io/pterodactyl/yolks:java_8': 'ghcr.io/pterodactyl/yolks:java_8'
+file_denylist: {  }
+startup_commands:
+  Default: 'java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar JTS3ServerMod.jar'
+config:
+  files: {  }
+  startup:
+    done: 'Successful connected to '
+  logs: {  }
+  stop: ^C
+scripts:
+  installation:
+    script: |-
+      #!/bin/bash
+      # JTS3ServerMod
+      #
+      # Server Files: /mnt/server
+      # All required packages are installed in the used install image ghcr.io/parkervcp/installers:debian
+
+      export HOME=/mnt/server
+      mkdir -p /mnt/server
+      cd /mnt/server
+
+      if [ -z "$SERVER_VERSION" ] || [ "$SERVER_VERSION" == "latest" ]; then
+        echo -e "Downloading latest version with curl -L "https://www.stefan1200.de/dlrequest.php?file=jts3servermod &
+        type=.zip" -o JTS3ServerMod.zip"
+        curl -L "https://www.stefan1200.de/dlrequest.php?file=jts3servermod&type=.zip" -o JTS3ServerMod.zip
+      else
+        echo -e "running curl -L "https://www.stefan1200.de/downloads/JTS3ServerMod_$SERVER_VERSION.zip" -o JTS3ServerMod.zip"
+        curl -L "https://www.stefan1200.de/downloads/JTS3ServerMod_$SERVER_VERSION.zip" -o JTS3ServerMod.zip
+      fi
+
+      # no need to continue if we don't have an archive
+      if [ ! -f JTS3ServerMod.zip ]; then
+        echo "JTS3ServerMod.zip not found. Something went wrong. Exiting"
+        exit 2
+      fi
+
+      unzip JTS3ServerMod.zip
+      rm JTS3ServerMod.zip JTS3ServerMod-Windows.exe JTS3ServerMod-Windows_NoWindow.exe jts3servermod_startscript.sh
+      echo -e "Installation completed.
+      Configuration of the server must be done in the config folder to proceed."
+    container: 'ghcr.io/parkervcp/installers:debian'
+    entrypoint: bash
+variables:
+  -
+    name: Version
+    description: 'Version to download. Use latest to install latest version'
+    env_variable: SERVER_VERSION
+    default_value: latest
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'max:20'
+    sort: 1

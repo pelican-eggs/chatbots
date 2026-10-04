@@ -1,0 +1,151 @@
+_comment: 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL'
+meta:
+  version: PLCN_v3
+  update_url: 'https://raw.githubusercontent.com/pelican-eggs/chatbots/refs/heads/main/discord/dynamica/egg-dynamica.yaml'
+exported_at: '2025-12-23T00:19:33+00:00'
+name: Dynamica
+author: sebastian.pietschner@gmail.com
+uuid: 9327bb06-ab17-4dd4-ba8d-6b56a89b1c7f
+description: 'An easy-to-use dynamic voice channel bot.'
+image: null
+tags: {  }
+features: {  }
+docker_images:
+  'Nodejs 18': 'ghcr.io/parkervcp/yolks:nodejs_18'
+file_denylist: {  }
+startup_commands:
+  Default: 'npx prisma migrate deploy && yarn start'
+config:
+  files: {  }
+  startup:
+    done: 'Bot logged in as '
+  logs: {  }
+  stop: ^C
+scripts:
+  installation:
+    script: |-
+      #!/bin/bash
+
+      apt update
+      apt -y install tar curl jq git
+
+      mkdir -p /mnt/server
+      cd /mnt/server
+
+      GITHUB_PACKAGE="DynamicaBot/Dynamica-V2"
+
+      # Find GitHub download URL for Muse for specified version
+      LATEST_JSON=$(curl --silent "https://api.github.com/repos/${GITHUB_PACKAGE}/releases/latest")
+      RELEASES=$(curl --silent "https://api.github.com/repos/${GITHUB_PACKAGE}/releases")
+
+      if [ -z "${VERSION}" ] || [ "${VERSION}" == "latest" ]; then
+          DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq -r '.tarball_url')
+      else
+          VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION "${VERSION}" '.[] | select(.tag_name==$VERSION) | .tag_name')
+          if [ "${VERSION}" == "${VERSION_CHECK}" ]; then
+              DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION "${VERSION}" '.[] | select(.tag_name==$VERSION) | .tarball_url')
+          else
+              echo -e "Could not find version \"${VERSION}\" of Muse. Defaulting to latest release..."
+              DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq -r '.tarball_url')
+          fi
+      fi
+
+      curl -sSL -o dynamica.tar.gz ${DOWNLOAD_URL}
+      tar xvf dynamica.tar.gz --strip-components=1
+      rm dynamica.tar.gz
+
+      #curl -sSL -o tsconfig.json https://pteropaste.com/xqhjja443pbm
+
+      yarn add tsup --dev
+      yarn install  --frozen-lockfile
+
+      yarn generate
+      yarn build
+
+      rm -rf .github/ .vscode/ Dockerfile partial.Dockerfile entrypoint.sh dynamica-egg.json
+
+
+      ## install end
+      echo "-----------------------------------------"
+      echo "Installation completed..."
+      echo "-----------------------------------------"
+    container: 'node:18-bookworm-slim'
+    entrypoint: bash
+variables:
+  -
+    name: 'Database Path'
+    description: 'The path in which to create the sqlite database.'
+    env_variable: DATABASE_URL
+    default_value: 'file:/home/container/dynamica/db.sqlite'
+    user_viewable: true
+    user_editable: false
+    rules:
+      - required
+      - string
+    sort: 1
+  -
+    name: 'Guild ID'
+    description: 'Add only if using the bot in a single guild.'
+    env_variable: GUILD_ID
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - string
+      - nullable
+    sort: 2
+  -
+    name: 'MQTT Password'
+    description: 'The password for the MQTT broker.'
+    env_variable: MQTT_PASS
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - string
+      - nullable
+    sort: 3
+  -
+    name: 'MQTT URL'
+    description: 'The URL for the MQTT broker.'
+    env_variable: MQTT_URL
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - string
+      - nullable
+    sort: 4
+  -
+    name: 'MQTT Username'
+    description: 'The username for the MQTT broker.'
+    env_variable: MQTT_USER
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - string
+      - nullable
+    sort: 5
+  -
+    name: 'Sentry DSN'
+    description: 'The DSN for Sentry.'
+    env_variable: SENTRY_DSN
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - string
+      - nullable
+    sort: 6
+  -
+    name: Token
+    description: 'The token for the discord bot.'
+    env_variable: TOKEN
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+    sort: 7
