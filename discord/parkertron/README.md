@@ -4,7 +4,7 @@
 
 Purely a chatbot. Not even a smart one.
 
-Runs the Pterodactyl `@support bot`
+Runs the Pelican `@support bot`
 
 ## Server Ports
 

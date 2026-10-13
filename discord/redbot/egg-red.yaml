@@ -14,7 +14,7 @@ docker_images:
   'ghcr.io/parkervcp/yolks:bot_red': 'ghcr.io/parkervcp/yolks:bot_red'
 file_denylist: {  }
 startup_commands:
-  Default: 'PATH=$PATH:/home/container/.local/bin redbot pterodactyl --token {{TOKEN}} --prefix {{PREFIX}}'
+  Default: 'PATH=$PATH:/home/container/.local/bin redbot pelican --token {{TOKEN}} --prefix {{PREFIX}}'
 config:
   files: {  }
   startup:
@@ -34,9 +34,9 @@ scripts:
 
       ## config folder layouts
       echo -e "generating config folder layout"
-      mkdir -p /mnt/server/.config/{Red-DiscordBot,share}/ /mnt/server/.local/share/Red-DiscordBot/data/pterodactyl/
+      mkdir -p /mnt/server/.config/{Red-DiscordBot,share}/ /mnt/server/.local/share/Red-DiscordBot/data/pelican/
       cd /mnt/server/
-      ln -s .local/share/Red-DiscordBot/data/pterodactyl/ ./configs
+      ln -s .local/share/Red-DiscordBot/data/pelican/ ./configs
 
       ## install red
       echo -e "add container user to install"
