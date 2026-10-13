@@ -1,0 +1,95 @@
+_comment: 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL'
+meta:
+  version: PLCN_v3
+  update_url: 'https://raw.githubusercontent.com/pelican-eggs/chatbots/refs/heads/main/discord/redbot/egg-red.yaml'
+exported_at: '2025-12-23T00:23:02+00:00'
+name: Red
+author: parker@parkervcp.com
+uuid: b9413cbb-4422-4bd2-960f-1d4367248809
+description: "A multifunction Discord bot \r\n\r\nhttps://github.com/Cog-Creators/Red-DiscordBot"
+image: null
+tags: {  }
+features: {  }
+docker_images:
+  'ghcr.io/parkervcp/yolks:bot_red': 'ghcr.io/parkervcp/yolks:bot_red'
+file_denylist: {  }
+startup_commands:
+  Default: 'PATH=$PATH:/home/container/.local/bin redbot pterodactyl --token {{TOKEN}} --prefix {{PREFIX}}'
+config:
+  files: {  }
+  startup:
+    done: 'Invite URL:'
+  logs: {  }
+  stop: ^C
+scripts:
+  installation:
+    script: |-
+      #!/bin/bash
+      # red-discordbot install script
+
+      ## install deps
+      mkdir -p /usr/share/man/man1
+      apt update
+      apt -y install git ca-certificates dnsutils iproute2 make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev libgdbm-dev uuid-dev git openjdk-17-jre-headless
+
+      ## config folder layouts
+      echo -e "generating config folder layout"
+      mkdir -p /mnt/server/.config/{Red-DiscordBot,share}/ /mnt/server/.local/share/Red-DiscordBot/data/pterodactyl/
+      cd /mnt/server/
+      ln -s .local/share/Red-DiscordBot/data/pterodactyl/ ./configs
+
+      ## install red
+      echo -e "add container user to install"
+      ln -s /mnt/server/ /home/container
+      useradd -m -d /home/container container
+      chown -R container /mnt/server/
+      echo -e "install red locally as user"
+      pip install --upgrade pip
+      su - container -c 'pip install -U pip wheel'
+      su - container -c 'pip install -U Red-DiscordBot'
+
+      ## ensure the config is in place if it doesn't exist
+      if [ ! -f /mnt/server/.config/Red-DiscordBot/config.json ]; then
+          curl https://raw.githubusercontent.com/parkervcp/eggs/master/bots/discord/redbot/config.json -o /mnt/server/.config/Red-DiscordBot/config.json
+      fi
+
+      echo "-------------------------------------------------------"
+      echo "Installation completed"
+      echo "-------------------------------------------------------"
+    container: 'python:3.11-slim'
+    entrypoint: bash
+variables:
+  -
+    name: 'Command Prefix'
+    description: 'The prefix for commands from the bot.'
+    env_variable: PREFIX
+    default_value: .
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+    sort: 1
+  -
+    name: 'Discord Bot Token'
+    description: 'Get your own token here - https://discordapp.com/developers/applications/'
+    env_variable: TOKEN
+    default_value: GET_YOUR_OWN
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+    sort: 2
+  -
+    name: Owner
+    description: 'Owner of the Bot to use special commands'
+    env_variable: OWNER
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'max:30'
+    sort: 3

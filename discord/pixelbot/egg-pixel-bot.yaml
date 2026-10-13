@@ -1,0 +1,120 @@
+_comment: 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL'
+meta:
+  version: PLCN_v3
+  update_url: 'https://raw.githubusercontent.com/pelican-eggs/chatbots/refs/heads/main/discord/pixelbot/egg-pixel-bot.yaml'
+exported_at: '2025-12-23T00:25:10+00:00'
+name: pixel-bot
+author: parker@parkervcp.com
+uuid: 4c71610d-021b-4bae-bfa6-7132ff4980b0
+description: "A Discord bot written in Python using discord.py\r\n\r\nhttps://github.com/Ispira/pixel-bot"
+image: null
+tags: {  }
+features: {  }
+docker_images:
+  'ghcr.io/parkervcp/yolks:python_3.7': 'ghcr.io/parkervcp/yolks:python_3.7'
+file_denylist: {  }
+startup_commands:
+  Default: '/usr/local/bin/python bot.py'
+config:
+  files:
+    config/config.json:
+      parser: json
+      find:
+        owner: '{{server.environment.OWNER_UID}}'
+        token: '{{server.environment.BOT_TOKEN}}'
+        bot_name: '{{server.environment.BOT_NAME}}'
+        log_file: latest.log
+    plugins/settings/imgur.json:
+      parser: json
+      find:
+        client_id: '{{server.environment.IMGUR_KEY}}'
+        client_secret: '{{server.environment.IMGUR_SECRET}}'
+  startup:
+    done: 'Logged in as'
+  logs: {  }
+  stop: ^C
+scripts:
+  installation:
+    script: |-
+      #!/bin/ash
+      # Pixel Bot Installation Script
+      #
+      # Server Files: /mnt/server
+      apk add --no-cache git gcc g++ libffi-dev make
+
+      cd /mnt/server
+
+      echo "Cloning pixel-bot repo"
+      git clone https://github.com/Ispira/pixel-bot.git .
+
+      echo "Installing python requirements into folder"
+      pip install -U --target $(pwd) discord imgurpython xkcd pynacl
+
+
+      ## install end
+      echo "-----------------------------------------"
+      echo "Installation completed..."
+      echo "-----------------------------------------"
+    container: 'python:3.7-alpine'
+    entrypoint: ash
+variables:
+  -
+    name: 'Bot Name'
+    description: 'The name that you want set for the bot'
+    env_variable: BOT_NAME
+    default_value: Ispyra
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'max:20'
+    sort: 1
+  -
+    name: 'Discord Bot Token'
+    description: 'Get the app token from https://discordapp.com/developers/applications/me'
+    env_variable: BOT_TOKEN
+    default_value: 'get from discord developers'
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'max:128'
+    sort: 2
+  -
+    name: 'Imgur API ID'
+    description: "Add your Imgur API client_id if you want. \r\n\r\nhttps://api.imgur.com/oauth2/addclient"
+    env_variable: IMGUR_KEY
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:64'
+    sort: 3
+  -
+    name: 'Imgur Secret'
+    description: "Add your Imgur API client_secret if you want. \r\n\r\nhttps://api.imgur.com/oauth2/addclient"
+    env_variable: IMGUR_SECRET
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - nullable
+      - string
+      - 'max:20'
+    sort: 4
+  -
+    name: 'Owner Discord UID'
+    description: 'The Discord UID of the bot owner.'
+    env_variable: OWNER_UID
+    default_value: 'copy from discord'
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+      - 'max:32'
+    sort: 5

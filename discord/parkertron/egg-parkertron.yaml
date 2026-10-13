@@ -1,0 +1,63 @@
+_comment: 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL'
+meta:
+  version: PLCN_v3
+  update_url: 'https://raw.githubusercontent.com/pelican-eggs/chatbots/refs/heads/main/discord/parkertron/egg-parkertron.yaml'
+exported_at: '2025-12-23T00:24:52+00:00'
+name: parkertron
+author: parker@parkervcp.com
+uuid: 75489f17-c2a3-40b6-81b0-3de074ed69ac
+description: "The stupid chatbot parkertron by Parkervcp.\r\n\r\nhttps://github.com/parkervcp/parkertron"
+image: null
+tags: {  }
+features: {  }
+docker_images:
+  'ghcr.io/parkervcp/yolks:bot_parkertron': 'ghcr.io/parkervcp/yolks:bot_parkertron'
+file_denylist: {  }
+startup_commands:
+  Default: ./parkertron
+config:
+  files: {  }
+  startup:
+    done: 'Bot is now running'
+  logs: {  }
+  stop: shutdown
+scripts:
+  installation:
+    script: |-
+      #!/bin/bash
+      # parkertron Installation Script
+      #
+      # Server Files: /mnt/server
+      export GOPATH=$HOME/go
+      export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+
+      cd
+
+      apt update
+
+      apt install -y tesseract-ocr tesseract-ocr-eng libtesseract-dev
+
+      echo "pulling the parkertron git repo"
+
+      git clone https://github.com/parkervcp/parkertron.git
+
+      cd parkertron/
+
+      echo "building parkertron"
+
+      go build 
+
+      echo "build complete copying parkertron and example configs over"
+
+      cp parkertron /mnt/server/
+
+      if [ -d /mnt/server/configs ]; then
+          echo "Files exist already"
+      else
+          cp -r /root/parkertron/configs/ /mnt/server/
+      fi
+
+      echo "Install complete. If you watched this. Congrats."
+    container: 'golang:1.19-bookworm'
+    entrypoint: bash
+variables: {  }

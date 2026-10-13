@@ -1,0 +1,179 @@
+_comment: 'DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL'
+meta:
+  version: PLCN_v3
+  update_url: 'https://raw.githubusercontent.com/pelican-eggs/chatbots/refs/heads/main/discord/muse/egg-muse.yaml'
+exported_at: '2025-12-23T00:21:41+00:00'
+name: Muse
+author: red_thirten@yahoo.com
+uuid: d0cd727e-3f34-40f2-918e-85556830365c
+description: |-
+  Muse is a self-hosted Discord music bot that is made for small to medium-sized Discord
+  servers/guilds.
+image: null
+tags: {  }
+features: {  }
+docker_images:
+  'ghcr.io/parkervcp/yolks:nodejs_22': 'ghcr.io/parkervcp/yolks:nodejs_22'
+file_denylist: {  }
+startup_commands:
+  Default: 'yarn start'
+config:
+  files:
+    .env:
+      parser: file
+      find:
+        DISCORD_TOKEN: 'DISCORD_TOKEN={{server.environment.BOT_TOKEN}}'
+        YOUTUBE_API_KEY: 'YOUTUBE_API_KEY={{server.environment.YOUTUBE_API_KEY}}'
+        SPOTIFY_CLIENT_ID: 'SPOTIFY_CLIENT_ID= {{server.environment.SPOTIFY_CLIENT_ID}}'
+        SPOTIFY_CLIENT_SECRET: 'SPOTIFY_CLIENT_ID= {{server.environment.SPOTIFY_CLIENT_SECRET}}'
+  startup:
+    done: Ready!
+  logs: {  }
+  stop: ^C
+scripts:
+  installation:
+    script: |-
+      #!/bin/bash
+
+      ## File: Pelican Muse Egg - egg-muse.json
+      ## Authors: David Wolfe (Red-Thirten), TubaApollo, parkervcp
+      ## Date: 2025/06/25
+      ## License: MIT License
+
+      GITHUB_PACKAGE="museofficial/muse"
+
+      apt update
+      apt install -y tar curl jq python3 build-essential
+
+      ## Muse Install
+      [ ! -d /mnt/server ] && mkdir /mnt/server
+      cd /mnt/server
+      echo -e "
+      Installing/Updating Muse...
+      "
+
+      # Remove all existing files/folders, except `data` folder
+      find . -mindepth 1 -depth ! -path './data' ! -path './data/*' -exec rm -rf {} +
+
+      # Get download URL
+      LATEST_JSON=$(curl --silent "https://api.github.com/repos/${GITHUB_PACKAGE}/releases/latest")
+      RELEASES=$(curl --silent "https://api.github.com/repos/${GITHUB_PACKAGE}/releases")
+
+      if [ -z "${VERSION}" ] || [ "${VERSION}" == "latest" ]; then
+          DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq -r .tarball_url)
+      else
+          VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION "${VERSION}" '.[] | select(.tag_name==$VERSION) | .tag_name')
+          if [ "${VERSION}" == "${VERSION_CHECK}" ]; then
+              DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION "${VERSION}" '.[] | select(.tag_name==$VERSION) | .tarball_url')
+          else
+              echo -e "Defaulting to latest release..."
+              DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq -r .tarball_url)
+          fi
+      fi
+
+      # Download tarball & check for success
+      echo -e "Downloading ${VERSION} from ${DOWNLOAD_URL}..."
+      curl -Lo muse-${VERSION}.tar.gz ${DOWNLOAD_URL}
+      if [[ ! -f muse-${VERSION}.tar.gz ]]; then
+          echo -e "
+
+      Failed to download ${VERSION} version of Muse!"
+          echo -e "\tTry reinstalling the server again.
+      "
+          exit 1
+      fi
+
+      # Extract & delete tarball
+      echo -e "Extracting muse-${VERSION}.tar.gz..."
+      tar -xzvf muse-${VERSION}.tar.gz --strip-components=1
+      rm muse-${VERSION}.tar.gz
+
+      # Install dependencies & clean up
+      echo -e "Installing dependencies..."
+      yarn install --prod || exit 1
+      cp .env.example .env
+      echo -e "Removing unneeded files..."
+      rm -rf .dockerignore Dockerfile .gitignore .github/ RELEASING.md
+
+      echo -e "
+      Muse successfully installed!"
+    container: 'node:lts-bookworm-slim'
+    entrypoint: /bin/bash
+variables:
+  -
+    name: 'Discord Bot Token'
+    description: |-
+      The token for your Discord bot. Learn how to obtain a token and configure your bot application
+      properly here: https://jmusicbot.com/getting-a-bot-token/
+    env_variable: DISCORD_TOKEN
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+    sort: 1
+  -
+    name: 'Spotify Client ID'
+    description: "Can be acquired at https://developer.spotify.com/dashboard/applications with 'Create a Client ID'."
+    env_variable: SPOTIFY_CLIENT_ID
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+    sort: 3
+  -
+    name: 'Spotify Client Secret'
+    description: "Can be acquired at https://developer.spotify.com/dashboard/applications with 'Create a Client ID'."
+    env_variable: SPOTIFY_CLIENT_SECRET
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+    sort: 4
+  -
+    name: 'YouTube API Key'
+    description: |-
+      Can be acquired by creating a new project in Google's Developer Console
+      (https://console.developers.google.com/), enabling the YouTube API, and creating an API key under
+      credentials.
+    env_variable: YOUTUBE_API_KEY
+    default_value: ''
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+    sort: 2
+  -
+    name: '[Advanced] Release Version Tag'
+    description: |-
+      Which release (based on tag) to download from https://github.com/museofficial/muse/releases. To
+      download the latest release version, "latest" can be used.
+    env_variable: VERSION
+    default_value: latest
+    user_viewable: true
+    user_editable: true
+    rules:
+      - required
+      - string
+    sort: 5
+  -
+    name: '[System] Force Headless Environment'
+    description: |-
+      This should not be changed. It is used by the Egg to tell Ora (a dependency of Muse) that it is
+      running in a Continuous Integration-like environment (ie. headless), which disables loading spinners
+      that break the console output.
+    env_variable: CI
+    default_value: true
+    user_viewable: false
+    user_editable: false
+    rules:
+      - required
+      - string
+      - 'in:true'
+    sort: 6
